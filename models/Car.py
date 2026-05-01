@@ -1,27 +1,17 @@
-# Automobil moze biti samo audi, bmw , mercedes
-# Modelli : Audi: A4,A5,A6
-# BMW: M3, M5
-# Mercedes : GLK , GLE
-
-# Bonus: stavi da svaki model ima svoju godinu proizvodnje, zadatak je da napravimo
-# attribut production year
-# Ako stavimo Audi A4 -> korisnik moze da getuje vrednost, ali ne moze da upise
-
-
 class Car:
     VALID_CARS = {
         "AUDI": [
-            {"model": "A4", "production_year": 2004},
-            {"model": "A5", "production_year": 2003},
-            {"model": "A6", "production_year": 2002},
+            {"model": "A4", "production_year": 2004, "rented": False, "rented until": None},
+            {"model": "A5", "production_year": 2003, "rented": True, "rented until": None},
+            {"model": "A6", "production_year": 2002, "rented": False, "rented until": None},
         ],
         "BMW": [
-            {"model": "M5", "production_year": 2010},
-            {"model": "M3", "production_year": 2008},
+            {"model": "M5", "production_year": 2010, "rented": False, "rented until": None},
+            {"model": "M3", "production_year": 2008, "rented": True, "rented until": None},
         ],
         "MERCEDES": [
-            {"model": "GLK", "production_year": 2015},
-            {"model": "GLE", "production_year": 2017},
+            {"model": "GLK", "production_year": 2015, "rented": False, "rented until": None},
+            {"model": "GLE", "production_year": 2017, "rented": False, "rented until": None},
         ],
     }
 
@@ -55,6 +45,15 @@ class Car:
             if car['model'] == self.__model:
                 return f"Production year of this car is {car["production_year"]}"
 
+    @property
+    def rented_cars(self):
+        if self.brand is None or self.__model is None:
+            return f"Enter a brand or model!"
+
+        for car in Car.VALID_CARS:
+            if car['model'] == self.__model:
+                return
+
     # SET METHODS
 
     @brand.setter
@@ -79,5 +78,3 @@ class Car:
             self.__model = model
         else:
             raise ValueError(f"Not valid model! Allowed models are {valid_models}")
-
-

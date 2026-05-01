@@ -1,14 +1,21 @@
-from Db import Db
+# from Db import Db
 
 
-class User(Db):
+class User():
+    users = []
 
     def __init__(self):
-        super().__init__()
+        #  super().__init__()
         self.__name = None
         self.__age = None
 
-        con = super().get_connection()
+    def __str__(self):
+        return f"{self.__name} {self.__age}"
+
+    def __repr__(self):
+        return self.__str__()
+
+    # con = super().get_connection()
 
     # GET METHODS
 
@@ -30,13 +37,17 @@ class User(Db):
     # SET METHODS
 
     @name.setter
-    def name(self, name):
-        if not isinstance(name, str):
+    def name(self, Newname):
+        if not isinstance(Newname, str):
             raise ValueError("User name must be of type str")
-        elif len(name) < 1:
+        elif len(Newname) < 1:
             raise ValueError("User name must be at least 1 character")
         else:
-            self.__name = name
+            split_name = Newname.split()
+            if len(split_name) < 2:
+                raise ValueError("Name format must bi 'first name last name'")
+            else:
+                self.__name = Newname
 
     @age.setter
     def age(self, age):
@@ -47,5 +58,9 @@ class User(Db):
         else:
             self.__age = age
 
-
-
+    def create(self):
+        if self.__name is None or self.__age is None:
+            raise ValueError("Name or age are not set")
+        else:
+            print("User created successfully")
+            User.users.append(self)
