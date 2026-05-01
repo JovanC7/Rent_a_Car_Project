@@ -4,7 +4,7 @@
 # Mercedes : GLK , GLE
 
 # Bonus: stavi da svaki model ima svoju godinu proizvodnje, zadatak je da napravimo
-#attribut production year
+# attribut production year
 # Ako stavimo Audi A4 -> korisnik moze da getuje vrednost, ali ne moze da upise
 
 
@@ -29,15 +29,16 @@ class Car:
         self.__brand = None
         self.__model = None
 
+        # GET METHODS
 
-    @property # get dekorator
+    @property
     def model(self):
         if self.__model is None:
             return f"Model not entered yet."
         else:
             return f"Model: {self.__model}"
 
-    @property # get dekorator
+    @property
     def brand(self):
         if self.__brand is None:
             return f"Brand not entered yet."
@@ -54,13 +55,12 @@ class Car:
             if car['model'] == self.__model:
                 return f"Production year of this car is {car["production_year"]}"
 
+    # SET METHODS
 
-
-
-    @brand.setter # SETTER ZA BRAND
-    def brand(self,brand):
+    @brand.setter
+    def brand(self, brand):
         brand = brand.upper()
-        if not isinstance(brand, str) :
+        if not isinstance(brand, str):
             raise ValueError("Brand not entered yet.")
         else:
             if brand in Car.VALID_CARS.keys():
@@ -68,8 +68,7 @@ class Car:
             else:
                 raise ValueError("The brand must be audi, bmw or mercedes!")
 
-
-    @model.setter # SETTER MODEL
+    @model.setter
     def model(self, model):
         model = model.upper()
         valid_models = []
@@ -77,27 +76,8 @@ class Car:
             valid_models.append(car["model"])
 
         if model in valid_models:
-                self.__model = model
+            self.__model = model
         else:
-                raise ValueError(f"Not valid model! Allowed models are {valid_models}")
-
-
-
-
-#### DEMO ###
-car1 = Car()
-print(car1.brand)
-print(car1.model)
-
-car1.brand = "Mercedes"
-print(car1.brand)
-
-car1.model = "GLE"
-print(car1.model)
-print(car1.production_year)
-
-
-
-
+            raise ValueError(f"Not valid model! Allowed models are {valid_models}")
 
 
